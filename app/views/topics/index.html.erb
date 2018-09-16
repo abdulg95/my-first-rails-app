@@ -1,8 +1,10 @@
+<% provide(:page_title,'All polls') %>
+<% provide(:polls_active,'active') %>
 <p id="notice"><%= notice %></p>
 
 <h1>Topics</h1>
 
-<table>
+<table class = "tresponsive">
   <thead>
     <tr>
       <th>Title</th>
@@ -12,12 +14,20 @@
 
   <tbody>
   <% @topics.each do |topic| %>
-    <tr>
-    <td><%= link_to topic.title, topic %></td>
-      <td><%= pluralize(topic.votes_count, "vote") %></td>
-      <td><%= button_to '+1', upvote_topic_path(topic), method: :post %></td>
-      <td><%= button_to '-1', downvote_topic_path(topic), method: :post %></td>      
-      <td><%= link_to 'Delete', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <tr class = "info">
+    <td class="spacing"><%= link_to topic.title, topic %></td>
+      <td class="spacing"><%= pluralize(topic.votes_count, "vote") %></td>
+      <td class="spacing-button">
+          <%= button_to  upvote_topic_path(topic), class: 'btn btn-success btn-sm btn-collapsible',  method: :post do %>
+          <i class="glyphicon glyphicon-plus"></i> Upvote         
+          <% end %>
+      </td>
+      <td class="spacing-button">
+          <%= button_to  downvote_topic_path(topic), class: 'btn btn-danger btn-sm btn-collapsible',  method: :post do %>
+          <i class="glyphicon glyphicon-minus"></i> Downvote         
+          <% end %>
+      </td class="spacing">
+      <td class="spacing"><%= link_to 'Delete', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </tbody>
